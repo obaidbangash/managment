@@ -102,7 +102,7 @@ function SignUp() {
                     <p className="forgot-password text-right">
                         Already registered <Link to="/sign-in">Sign in?</Link>
                     </p>
-                    {user ? user.map(item => <p key={item} className="text-danger">{item}</p>) : null}
+                    {user ? user?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
                 </form>
             </div>
         </div>

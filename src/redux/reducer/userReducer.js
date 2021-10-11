@@ -14,12 +14,14 @@ export const userReducer = (state = initialState, action) => {
 
             }
         case SUCCESS:
+            console.log("action.payload", action);
             return {
                 ...state,
                 Loading: false,
                 User: action.payload,
                 error: ""
             }
+
         case ERROR:
             return {
                 ...state,

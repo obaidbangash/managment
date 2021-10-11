@@ -9,6 +9,7 @@ import { fetchIn } from "../../redux/action/userAction";
 function SignIn() {
     const dispatch = useDispatch();
     const signIn = useSelector(state => state.userReducer.User)
+    console.log("signIn", signIn)
     const history = useHistory();
 
     const dataObj = { email: "", password: "" }
@@ -20,14 +21,11 @@ function SignIn() {
         console.log(userData);
         if (userData.email.length < 1 || userData.password.length < 1) {
             setValid(true);
-
-
-
-        } else {
+        } else if (signIn.length === 0) {
             setValid(false);
             dispatch(fetchIn(userData));
             setUserData(dataObj);
-            // history.push("/dashboard");
+            history.push("/dashboard");
         }
     }
 

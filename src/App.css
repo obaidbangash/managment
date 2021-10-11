@@ -83,3 +83,8 @@ body, html, .App, #root, .auth-wrapper {
   font-size: 12px;
   text-transform: capitalize;
 }
+
+
+.main-section{
+  padding: 100px 0;
+}

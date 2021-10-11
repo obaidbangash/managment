@@ -48,8 +48,15 @@ export const fetchIn = (state) => {
             },
         })
             .then((response) => response.json())
-            // .then((json) => console.log(json));
-            .then((json) => dispatch(PostSuccess(json)))
+            .then((json) => {
+                console.log(json);
+                const { token } = json;
+                if (typeof token !== "undefined") {
+                    sessionStorage.setItem("token", token);
+                }
+                dispatch(PostSuccess(json))
+            })
+            // .then((json) => dispatch(PostSuccess(json)))
             .catch(error => dispatch(PostError(error.message)))
     }
 }
