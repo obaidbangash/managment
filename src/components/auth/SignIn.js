@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from 'react-bootstrap/Button';
+import React, { useState, useEffect } from "react";
 import "./auth.css";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchIn } from "../../redux/action/userAction";
 // import "./Login.css";
-function SignIn() {
+function SignIn({ setLogin }) {
     const dispatch = useDispatch();
-    const signIn = useSelector(state => state.userReducer.User)
-    console.log("signIn", signIn)
+    const user = useSelector(state => state.userReducer.User);
+    const error = useSelector(state => state.userReducer.error);
+
+
+    console.log(user, error)
     const history = useHistory();
+
 
     const dataObj = { email: "", password: "" }
     const [userData, setUserData] = useState(dataObj);
@@ -21,14 +23,21 @@ function SignIn() {
         console.log(userData);
         if (userData.email.length < 1 || userData.password.length < 1) {
             setValid(true);
-        } else if (signIn.length === 0) {
+        } else if (user) {
+            sessionStorage.setItem("email", userData.email)
+            sessionStorage.setItem("password", userData.password)
+            sessionStorage.setItem("logIn", true);
             setValid(false);
-            dispatch(fetchIn(userData));
+            dispatch(fetchIn(userData, history));
             setUserData(dataObj);
-            history.push("/dashboard");
-        }
-    }
+            setLogin(true)
 
+        }
+
+    }
+    useEffect(() => {
+        dispatch(fetchIn(userData, history));
+    }, [])
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
@@ -70,7 +79,7 @@ function SignIn() {
                     <p className="forgot-password text-right">
                         <Link to="/sign-up">Sign Up?</Link>
                     </p>
-                    {signIn ? signIn.map(item => <p key={item} className="text-danger">{item}</p>) : null}
+                    {error.length > 0 ? error.map(item => <p key={item} className="text-danger">{item}</p>) : <p className="text-danger">{error.message}</p>}
                 </form>
             </div>
         </div>

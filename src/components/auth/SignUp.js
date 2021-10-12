@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPost } from '../../redux/action/userAction';
 // import { useReducer } from 'react';
 
-function SignUp() {
+function SignUp({ setLogin }) {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.userReducer.User);
+    // const user = useSelector(state => state.userReducer.User);
     const loading = useSelector(state => state.userReducer.loading);
-    // const error = useSelector(state => state.userReducer.error);
+    const error = useSelector(state => state.userReducer.error);
     // console.log(user[0])
+    const history = useHistory();
 
-
-
+    console.log(history)
     const dataObj = { firstName: "", lastName: "", email: "", password: "", password_confirmation: "" }
     const [userData, setUserData] = useState(dataObj);
     const [valid, setValid] = useState(false)
@@ -27,10 +27,9 @@ function SignUp() {
 
         } else {
             setValid(false);
-            console.log(userData)
-            dispatch(fetchPost(userData))
-            setUserData(dataObj)
-
+            dispatch(fetchPost(userData, history))
+            setUserData(dataObj);
+            // setLogin(true)
         }
     }
     return (
@@ -102,7 +101,7 @@ function SignUp() {
                     <p className="forgot-password text-right">
                         Already registered <Link to="/sign-in">Sign in?</Link>
                     </p>
-                    {user ? user?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
+                    {error ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : error.message}
                 </form>
             </div>
         </div>

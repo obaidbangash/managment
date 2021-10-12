@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
 
-function CreateUser() {
+import { Createusers, getUsers } from '../../redux/action/userAction';
+function CreateUser({ setCreateUser }) {
+    const formError = useSelector(state => state.userReducer.error);
+    console.log(formError, "userError")
+    // dispatch 
+    const dispatch = useDispatch();
+    // getting token copy
+    let token = sessionStorage.getItem("token");
+    // initial data
+    const dataObj = { firstName: "", lastName: "", email: "", password: "", password_confirmation: "", userType: "user" }
+    // state for userdata
+    const [userData, setUserData] = useState(dataObj);
+    // state for validation
+    const [valid, setValid] = useState(false)
+    // function for create user button
+    const formHandler = (e) => {
+        e.preventDefault();
+        if (userData.firstName.length < 1 || userData.lastName.length < 1 || userData.email.length < 1 || userData.password.length < 1 || userData.password_confirmation.length < 1) {
+            setValid(true);
+        } else {
+            setValid(false);
+            dispatch(Createusers(userData, token))
+            setUserData(dataObj);
+            dispatch(getUsers(token))
+        }
+    }
     return (
         <>
+            <div className="auth-wrapper create-user">
 
-            <div className="auth-wrapper">
                 <div className="auth-inner">
+                    <i className="fa fa-close close-btn" onClick={() => setCreateUser(false)}> </i>
                     <form>
                         <h3>Create User</h3>
 
@@ -20,7 +48,6 @@ function CreateUser() {
                                 valid && userData.firstName == "" ? <span className="text-danger error-span py-2">The First Name Can Not Be Blank.</span> : null
                             }
                         </div>
-
                         <div className="form-group">
                             <label>Last name</label>
                             <input type="text" className="form-control" value={userData.lastName} placeholder="Last name" onChange={(e) => {
@@ -32,7 +59,6 @@ function CreateUser() {
                                 valid && userData.lastName == "" ? <span className="text-danger error-span py-2">The Last Name Can Not Be Blank.</span> : null
                             }
                         </div>
-
                         <div className="form-group">
                             <label>Email address</label>
                             <input type="email" className="form-control " value={userData.email} placeholder="Enter email" onChange={(e) => {
@@ -44,7 +70,6 @@ function CreateUser() {
                                 valid && userData.email == "" ? <span className="text-danger error-span py-2">The Email Can Not Be Blank.</span> : null
                             }
                         </div>
-
                         <div className="form-group">
                             <label>Password</label>
                             <input type="password" className="form-control" value={userData.password} placeholder="Enter password" onChange={(e) => {
@@ -67,12 +92,8 @@ function CreateUser() {
                                 valid && userData.password_confirmation == "" ? <span className="text-danger error-span py-2">The Password Can Not Be Blank.</span> : null
                             }
                         </div>
-                        <button onClick={(e) => formHandler(e)} className="btn btn-primary btn-block">Sign Up</button>
-
-                        <p className="forgot-password text-right">
-                            Already registered <Link to="/sign-in">Sign in?</Link>
-                        </p>
-                        {/* {user ? user?.map(item => <p key={item} className="text-danger">{item}</p>) : null} */}
+                        <button onClick={(e) => formHandler(e)} className="btn btn-primary btn-block">Create User</button>
+                        {formError.length > 0 ? formError?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
                     </form>
                 </div>
             </div>

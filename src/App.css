@@ -41,6 +41,11 @@ body, html, .App, #root, .auth-wrapper {
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
   transition: all .3s;
+  position: relative;
+}
+
+.create-user .auth-inner {
+  margin: 0 auto;
 }
 
 .auth-wrapper .form-control:focus {
@@ -84,7 +89,22 @@ body, html, .App, #root, .auth-wrapper {
   text-transform: capitalize;
 }
 
-
-.main-section{
+.main-section {
   padding: 100px 0;
+}
+
+.create-user {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1111111;
+  min-height: 100vh;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
 }
