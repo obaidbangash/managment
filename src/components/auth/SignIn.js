@@ -10,7 +10,7 @@ function SignIn({ setLogin }) {
     const error = useSelector(state => state.userReducer.error);
 
 
-    console.log(user, error)
+    console.log(user, error, "error")
     const history = useHistory();
 
 
@@ -23,7 +23,7 @@ function SignIn({ setLogin }) {
         console.log(userData);
         if (userData.email.length < 1 || userData.password.length < 1) {
             setValid(true);
-        } else if (user) {
+        } else if (!error) {
             sessionStorage.setItem("email", userData.email)
             sessionStorage.setItem("password", userData.password)
             sessionStorage.setItem("logIn", true);
@@ -36,14 +36,14 @@ function SignIn({ setLogin }) {
 
     }
     useEffect(() => {
-        dispatch(fetchIn(userData, history));
+        // dispatch(fetchIn(userData, history));
     }, [])
+
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
                 <form>
                     <h3>Sign In</h3>
-
                     <div className="form-group">
                         <label>Email address</label>
                         <input type="email" className="form-control " value={userData.email} placeholder="Enter email" onChange={(e) => {
@@ -79,7 +79,7 @@ function SignIn({ setLogin }) {
                     <p className="forgot-password text-right">
                         <Link to="/sign-up">Sign Up?</Link>
                     </p>
-                    {error.length > 0 ? error.map(item => <p key={item} className="text-danger">{item}</p>) : <p className="text-danger">{error.message}</p>}
+                    {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : <p className="text-danger">{error}</p>}
                 </form>
             </div>
         </div>

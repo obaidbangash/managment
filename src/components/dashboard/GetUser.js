@@ -1,33 +1,37 @@
 import React, { useEffect } from 'react'
 import { getUsers, DeleteUser, UpdateUser } from '../../redux/action/userAction';
 import { useSelector, useDispatch } from "react-redux";
-
+import { set_page, getAllData } from "../../redux/action/PaginationAction";
+import Pagenation from "./Pagenation"
 function GetUser({ setEditForm, setEditData }) {
     const user = useSelector(state => state.userReducer.users);
-
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
     useEffect(() => {
         dispatch(getUsers(token))
     }, []);
-    useEffect((id) => {
-        dispatch(DeleteUser(token, id))
-    }, [user.length]);
 
+    const workData = useSelector(state => state.Pagenation.users);
+    const page = useSelector((state) => state.Pagenation.page)
+    const totalPages = useSelector((state) => state.Pagenation.AllPages)
+    useEffect(() => {
+        dispatch(getAllData(token, page));
+    }, [token, page])
 
     const RemoveUser = (id) => {
-        dispatch(DeleteUser(token, id))
         dispatch(getUsers(token))
+        dispatch(DeleteUser(token, id))
     }
-    const EditUser = (state, id, token) => {
+    const EditUser = (state) => {
+        setEditData(state)
         setEditForm(true)
-        dispatch(UpdateUser(state, token, id))
+        // dispatch(UpdateUser(state))
     }
-    console.log(user, "user")
+
     return (
         <div>
-            <table class="table table-striped">
-                <thead class="thead-dark bg-dark text-white">
+            <table className="table table-striped">
+                <thead className="thead-dark bg-dark text-white">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">FirstName</th>
@@ -42,7 +46,7 @@ function GetUser({ setEditForm, setEditData }) {
                 </thead>
                 <tbody>
                     {
-                        user.length > 1 ? user?.map((item, i) => {
+                        Array.isArray(workData) ? workData?.map((item, i) => {
                             return (
                                 <>
                                     <tr key={i}>
@@ -51,14 +55,13 @@ function GetUser({ setEditForm, setEditData }) {
                                         <td>{item.lastName}</td>
                                         <td>{item.email}</td>
                                         <td>{item.created_at}</td>
-                                        <td>{item.manager.firstName}</td>
-                                        <td>{item.manager.working_hours}</td>
+                                        <td>{item.manager?.firstName}</td>
+                                        <td>{item.manager?.working_hours}</td>
                                         <td><button className="btn btn-danger" onClick={() => {
                                             RemoveUser(item.id)
                                         }}>Delete</button></td>
                                         <td><button className="btn btn-danger" onClick={() => {
-                                            setEditData(item)
-                                            EditUser(item.id,)
+                                            EditUser(item)
                                         }} >Edit</button></td>
                                     </tr>
                                 </>
@@ -69,9 +72,7 @@ function GetUser({ setEditForm, setEditData }) {
 
                 </tbody>
             </table>
-
-
-
+            <Pagenation />
         </div >
     )
 }

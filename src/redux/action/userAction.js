@@ -26,6 +26,12 @@ export const Create_user = (user) => {
         payload: user.user
     }
 }
+export const Create_user_Error = (error) => {
+    return {
+        type: "CREATE_USER_ERROR",
+        payload: error
+    }
+}
 // getting created  users from api
 export const GetSuccess = (users) => {
     return {
@@ -33,6 +39,13 @@ export const GetSuccess = (users) => {
         payload: users
     }
 }
+export const GetUserError = (error) => {
+    return {
+        type: "GET_USER_ERROR",
+        payload: error
+    }
+}
+
 // error
 export const PostError = (error) => {
     return {
@@ -47,11 +60,23 @@ export const DeleteSuccess = (user) => {
         payload: user
     }
 }
+export const Delete_Error = (error) => {
+    return {
+        type: "DELETE_ERROR",
+        payload: error
+    }
+}
 // update user
 export const UpdateSuccess = (user) => {
     return {
         type: UPDATE_USER,
         payload: user
+    }
+}
+export const UpdateError = (error) => {
+    return {
+        type: "UPDATE_ERROR",
+        payload: error
     }
 }
 // token 
@@ -90,6 +115,7 @@ export const fetchPost = (state, history) => {
 }
 
 export const fetchIn = (state, history) => {
+    console.log(state, "sattttttt")
     return (dispatch) => {
         dispatch(PostLoading())
         axios.post('http://34.210.129.167/api/login', state, {
@@ -99,6 +125,7 @@ export const fetchIn = (state, history) => {
         })
             .then((res) => {
                 sessionStorage.setItem("token", res.data.token)
+                sessionStorage.setItem("role", res.data.roles[0].name)
                 dispatch(postSignIn(res.data))
                 dispatch(setToken(res.data.token));
                 history.push('/')
@@ -123,7 +150,7 @@ export const Createusers = (state, token) => {
                 dispatch(Create_user(res.data))
             })
             .catch(error => {
-                dispatch(PostError(error.response?.data))
+                dispatch(Create_user_Error(error.response?.data))
             })
     }
 }
@@ -142,7 +169,7 @@ export const getUsers = (token) => {
                 dispatch(GetSuccess(res.data.users.data))
             })
             .catch(error => {
-                dispatch(PostError(error.message))
+                dispatch(GetUserError(error.message))
             })
     }
 }
@@ -161,28 +188,30 @@ export const DeleteUser = (token, id) => {
                 dispatch(DeleteSuccess(res.data.users.data))
             })
             .catch(error => {
-                dispatch(PostError(error.message))
+                dispatch(Delete_Error(error.message))
             })
     }
 }
 
 
-export const UpdateUser = (state, id, token) => {
+export const UpdateUser = (state,) => {
+    const token = sessionStorage.getItem("token");
     return (dispatch) => {
         dispatch(PostLoading())
-        axios.put(`http://34.210.129.167/api/users/${id}`, state, {
+        axios.put(`http://34.210.129.167/api/users/${state.id}`, state, {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 "Authorization": `Bearer ${token}`,
             }
         })
             .then((res) => {
-                console.log(id);
                 dispatch(UpdateSuccess(res.data.users.data))
             })
             .catch(error => {
-                console.log(error.message);
-                dispatch(PostError(error.message))
+
+                dispatch(UpdateError(error.message))
             })
     }
 }
+
+

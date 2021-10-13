@@ -20,7 +20,7 @@ function EditUser({ setEditForm, setEditData, editData }) {
         } else {
             setValid(false);
             setValid(dataObj);
-            dispatch(UpdateUser(edit, edit.id, token))
+            dispatch(UpdateUser(edit))
 
         }
     }

@@ -6,7 +6,7 @@ function Header({ setLogin }) {
         // e.preventDefault()
         sessionStorage.removeItem("email");
         sessionStorage.removeItem("password");
-        sessionStorage.removeItem("token");
+        // sessionStorage.removeItem("token");
         sessionStorage.setItem("logIn", false);
         setLogin(false)
 

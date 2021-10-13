@@ -15,15 +15,15 @@ function App() {
     dispatch(initToken())
   }, []);
   const token = useSelector((state) => state.userReducer.token);
-  const logIN = sessionStorage.getItem("logIn")
-  const [logIn, setLogin] = useState(logIN);
+  const auth = sessionStorage.getItem("logIn")
+  const [logIn, setLogin] = useState(auth);
   // useEffect(() => {
   //   setLogin(token)
   // }, [])
 
   console.log(logIn)
   let Routes;
-  if (logIn) {
+  if (logIn === "true") {
     Routes = (
       <Switch>
         <Route exact path="/" component={Dashboard} />
