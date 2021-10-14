@@ -23,7 +23,7 @@ function SignIn({ setLogin }) {
         console.log(userData);
         if (userData.email.length < 1 || userData.password.length < 1) {
             setValid(true);
-        } else if (!error) {
+        } else {
             sessionStorage.setItem("email", userData.email)
             sessionStorage.setItem("password", userData.password)
             sessionStorage.setItem("logIn", true);
@@ -79,7 +79,7 @@ function SignIn({ setLogin }) {
                     <p className="forgot-password text-right">
                         <Link to="/sign-up">Sign Up?</Link>
                     </p>
-                    {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : <p className="text-danger">{error}</p>}
+                    {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
                 </form>
             </div>
         </div>
