@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { UpdateUser } from "../../redux/action/userAction"
+import { getAllData } from "../../redux/action/PaginationAction"
 function EditUser({ setEditForm, setEditData, editData }) {
     // const user = useSelector(state => state.userReducer.updateUser);
     const dispatch = useDispatch();
@@ -10,6 +11,8 @@ function EditUser({ setEditForm, setEditData, editData }) {
     const dataObj = { firstName: "", lastName: "", email: "", password: "", password_confirmation: "" }
     const [edit, setEdit] = useState(editData)
     const [valid, setValid] = useState(false)
+    const page = useSelector((state) => state.Pagenation.page);
+
     // console.log(edit)
     const formHandler = (e) => {
         e.preventDefault();
@@ -21,6 +24,8 @@ function EditUser({ setEditForm, setEditData, editData }) {
             setValid(false);
             setValid(dataObj);
             dispatch(UpdateUser(edit))
+            dispatch(getAllData(token, page));
+
 
         }
     }
