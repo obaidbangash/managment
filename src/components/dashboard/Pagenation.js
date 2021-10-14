@@ -13,8 +13,8 @@ function Pagenation() {
     }, [token, page])
     return (
         <>
-            <nav aria-label="...">
-                <ul className="pagination mt-5">
+            <nav aria-label="..." className="text-end">
+                <ul className="pagination mt-5 ml-auto justify-content-end">
                     <li className={`page-item ${page <= 1 ? "disabled" : ''}`}>
                         <span className='page-link' style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page - 1))}>Previous</span>
                     </li>
