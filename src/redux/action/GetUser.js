@@ -1,38 +1,43 @@
 import axios from "axios";
-import { LOADING, DELETE_USER } from "../Type";
+import { LOADING, GETUSER } from "../Type";
 export const PostLoading = () => {
     return {
         type: LOADING
     }
 }
 
-export const DeleteSuccess = (user) => {
+
+export const GetSuccess = (users) => {
     return {
-        type: DELETE_USER,
-        payload: user
+        type: GETUSER,
+        payload: users
     }
 }
-export const Delete_Error = (error) => {
+export const GetUserError = (error) => {
     return {
-        type: "DELETE_ERROR",
+        type: "GET_USER_ERROR",
         payload: error
     }
 }
 
-export const DeleteUser = (token, id) => {
+
+export const getUsers = (token) => {
     return (dispatch) => {
         dispatch(PostLoading())
-        axios.delete(`http://34.210.129.167/api/users/${id}`, {
+        axios.get('http://34.210.129.167/api/users', {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 "Authorization": `Bearer ${token}`
             }
         })
             .then((res) => {
-                dispatch(DeleteSuccess(res.data.users.data))
+                // console.log(res.data.users.data);
+                dispatch(GetSuccess(res.data.users.data))
             })
             .catch(error => {
-                dispatch(Delete_Error(error.message))
+                dispatch(GetUserError(error.message))
             })
     }
 }
+
+

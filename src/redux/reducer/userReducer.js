@@ -9,7 +9,8 @@ const initialState = {
     UserError: "",
     DeleteError: "",
     UpdateError: "",
-    GetUserError: ""
+    GetUserError: "",
+    role: "",
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -102,6 +103,12 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 token: action.token
             }
+        case "ROLE":
+            return {
+                ...state,
+                role: action.role
+            }
+
         default:
             return state
 

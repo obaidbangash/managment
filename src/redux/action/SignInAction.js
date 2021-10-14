@@ -6,18 +6,38 @@ export const PostLoading = () => {
     }
 }
 
-export const Sign_Success = (user) => {
+export const postSignIn = (user) => {
     return {
         type: SIGNIN_SUCCESS,
         payload: user.user
     }
 }
-
-
 export const PostError = (error) => {
     return {
         type: ERROR,
         payload: error
+    }
+}
+
+export const setToken = (token) => {
+    return {
+        type: "TOKEN",
+        token
+    }
+}
+// init token
+export const initToken = () => {
+    const token = sessionStorage.getItem("token");
+    return {
+        type: "TOKEN",
+        token: token === 'undefined' ? undefined : token
+    }
+}
+export const setRole = () => {
+    const role = sessionStorage.getItem("role");
+    return {
+        type: "ROLE",
+        role
     }
 }
 
@@ -32,7 +52,9 @@ export const fetchIn = (state, history) => {
         })
             .then((res) => {
                 sessionStorage.setItem("token", res.data.token)
-                dispatch(Sign_Success(res.data))
+                sessionStorage.setItem("email", res.data.user.email)
+                sessionStorage.setItem("role", res.data.user.roles[0].name)
+                dispatch(postSignIn(res.data))
                 dispatch(setToken(res.data.token));
                 history.push('/')
             })
@@ -41,4 +63,3 @@ export const fetchIn = (state, history) => {
             })
     }
 }
-

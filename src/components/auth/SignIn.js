@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import "./auth.css";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchIn } from "../../redux/action/userAction";
+import { fetchIn } from "../../redux/action/SignInAction";
+
 // import "./Login.css";
 function SignIn({ setLogin }) {
+
+
     const dispatch = useDispatch();
     const user = useSelector(state => state.userReducer.User);
     const error = useSelector(state => state.userReducer.error);
 
-
-    console.log(user, error, "error")
+    // console.log(user, error, "error")
     const history = useHistory();
 
 
@@ -20,13 +22,10 @@ function SignIn({ setLogin }) {
     // console.log(userData)
     const formHandler = (e) => {
         e.preventDefault();
-        console.log(userData);
+        // console.log(userData);
         if (userData.email.length < 1 || userData.password.length < 1) {
             setValid(true);
         } else {
-            sessionStorage.setItem("email", userData.email)
-            sessionStorage.setItem("password", userData.password)
-            sessionStorage.setItem("logIn", true);
             setValid(false);
             dispatch(fetchIn(userData, history));
             setUserData(dataObj);

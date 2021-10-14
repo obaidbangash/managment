@@ -12,46 +12,29 @@ export const UpdateSuccess = (user) => {
         payload: user
     }
 }
-export const PostError = (error) => {
+export const UpdateError = (error) => {
     return {
-        type: ERROR,
+        type: "UPDATE_ERROR",
         payload: error
     }
 }
 
-
-export const setToken = (token) => {
-    return {
-        type: "TOKEN",
-        token
-    }
-}
-export const initToken = () => {
+export const UpdateUser = (state,) => {
     const token = sessionStorage.getItem("token");
-    return {
-        type: "TOKEN",
-        token: token === 'undefined' ? undefined : token
-    }
-}
-
-
-
-export const UpdateUser = (state, id, token) => {
     return (dispatch) => {
         dispatch(PostLoading())
-        axios.put(`http://34.210.129.167/api/users/${id}`, state, {
+        axios.put(`http://34.210.129.167/api/users/${state.id}`, state, {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 "Authorization": `Bearer ${token}`,
             }
         })
             .then((res) => {
-                console.log(id);
                 dispatch(UpdateSuccess(res.data.users.data))
             })
             .catch(error => {
-                console.log(error.message);
-                dispatch(PostError(error.message))
+
+                dispatch(UpdateError(error.message))
             })
     }
 }

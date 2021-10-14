@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { UpdateUser } from "../../redux/action/userAction"
+import { UpdateUser } from "../../redux/action/UpdateAction"
 import { getAllData } from "../../redux/action/PaginationAction"
+import { getUsers } from "../../redux/action/GetUser"
 function EditUser({ setEditForm, setEditData, editData }) {
     // const user = useSelector(state => state.userReducer.updateUser);
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function EditUser({ setEditForm, setEditData, editData }) {
             setValid(dataObj);
             dispatch(UpdateUser(edit))
             dispatch(getAllData(token, page));
+            dispatch(getUsers(token));
 
 
         }

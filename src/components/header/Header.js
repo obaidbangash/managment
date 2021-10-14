@@ -5,9 +5,12 @@ function Header({ setLogin }) {
     const signOut = () => {
         // e.preventDefault()
         sessionStorage.removeItem("email");
-        sessionStorage.removeItem("password");
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("role");
+        sessionStorage.removeItem("logIn");
+
         // sessionStorage.removeItem("token");
-        sessionStorage.setItem("logIn", false);
+        // sessionStorage.setItem("logIn", false);
         setLogin(false)
 
     }

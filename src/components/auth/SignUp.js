@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPost } from '../../redux/action/userAction';
+import { fetchPost } from '../../redux/action/SignUpAction';
 // import { useReducer } from 'react';
 
 function SignUp({ setLogin }) {

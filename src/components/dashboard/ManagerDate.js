@@ -5,8 +5,9 @@ import { DeleteUser } from '../../redux/action/DeleteAction';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllData } from "../../redux/action/PaginationAction";
 import Pagenation from "./Pagenation";
-function GetUser({ setEditForm, setEditData }) {
+function ManagerDate({ setEditData, setEditForm }) {
     const user = useSelector(state => state.userReducer.users);
+    let role = sessionStorage.getItem("role")
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
     useEffect(() => {
@@ -47,7 +48,7 @@ function GetUser({ setEditForm, setEditData }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.isArray(workData) && workData?.map((item, i) => {
+                    {Array.isArray(user) && user?.map((item, i) => {
                         return (
                             <>
                                 <tr key={i}>
@@ -74,9 +75,8 @@ function GetUser({ setEditForm, setEditData }) {
                 </tbody>
             </table>
             <Pagenation />
-
         </ >
     )
 }
 
-export default GetUser
+export default ManagerDate
