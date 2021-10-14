@@ -5,7 +5,8 @@ function Pagenation() {
     const token = sessionStorage.getItem('token')
     const dispatch = useDispatch()
     const page = useSelector((state) => state.Pagenation.page)
-    const totalPages = useSelector((state) => state.Pagenation.AllPages)
+    const totalPages = useSelector((state) => state.Pagenation.AllPages);
+    console.log(totalPages, page)
     // const role = useSelector((state)=>state.AuthReducer.role)
     useEffect(() => {
         dispatch(getAllData(token, page));
@@ -17,10 +18,13 @@ function Pagenation() {
                     <li className={`page-item ${page <= 1 ? "disabled" : ''}`}>
                         <span className='page-link' style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page - 1))}>Previous</span>
                     </li>
-                    {totalPages.map((p, i) => <li key={i} className={`page-item ${p === page ? 'active' : ''}`} aria-current="page">
+                    <li className={`page-item ${page === page ? '' : ''}`} >
+                        <span className="page-link" style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page))}>{page}</span>
+                    </li>
+                    {/* {totalPages.map((p, i) => <li key={i} className={`page-item ${p === page ? 'active' : ''}`} aria-current="page">
                         <span className="page-link" style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(p))}>{p}</span>
                     </li>
-                    )}
+                    )} */}
                     <li className={`page-item ${page === totalPages.length ? "disabled" : ''}`}>
                         <span className={`page-link`} style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page + 1))}>Next</span>
                     </li>
