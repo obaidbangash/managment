@@ -16,13 +16,22 @@ export const UpdateLogError = (error) => {
         payload: error
     }
 }
+export const EditLogId = (id) => {
+    return {
+        type: "EDIT_LOG_ID",
+        payload: id
+    }
+}
 
-
-export const Update_Logs = (state, token) => {
-    console.log(state, token, "id token")
+export const Update_Logs = (id, state, token) => {
     return (dispatch) => {
         dispatch(EditLoading())
-        axios.put(`http://34.210.129.167/api/work-logs/${state.id}`, state, {
+        id == undefined ? axios.put(`http://34.210.129.167/api/work-logs/${state.id}`, state, {
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                "Authorization": `Bearer ${token}`
+            },
+        }) : axios.put(`http://34.210.129.167/api/user/${id}/work-logs/${state.id}`, state, {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 "Authorization": `Bearer ${token}`
