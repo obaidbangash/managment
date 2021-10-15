@@ -1,27 +1,23 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { PostLogs } from '../../../redux/action/CreateLogs';
-function Setlogs() {
+import { GetLogData } from '../../../redux/action/GetLogs';
+function Setlogs({ setSetModal }) {
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
+    let id = sessionStorage.getItem("id");
 
     const dataObj = { logDate: "", hours: "", description: "", }
     const [edit, setEdit] = useState(dataObj)
     const [valid, setValid] = useState(false)
-    // const page = useSelector((state) => state.Pagenation.page);
-
-    // console.log(edit)
     const formHandler = (e) => {
         e.preventDefault();
-
         if (edit.logDate.length < 1 || edit.hours.length < 1 || edit.description.length < 1) {
             setValid(true);
-
         } else {
             setValid(false)
             dispatch(PostLogs(edit, token))
-
-
+            dispatch(GetLogData(token))
         }
     }
     return (
@@ -29,7 +25,7 @@ function Setlogs() {
             <div className="auth-wrapper create-user">
 
                 <div className="auth-inner">
-
+                    <div class="close-btn" onClick={() => setSetModal(false)}>  <i class="fa fa-close"> </i></div>
                     <form>
                         <h3>Create WorkLogs</h3>
                         <div className="form-group">
@@ -70,9 +66,7 @@ function Setlogs() {
                     </form>
                 </div>
             </div>
-
         </>
     )
 }
-
 export default Setlogs;

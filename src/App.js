@@ -9,32 +9,31 @@ import SignIn from './components/auth/SignIn';
 import { initToken } from './redux/action/SignInAction';
 import { useDispatch, useSelector } from 'react-redux'
 import Setlogs from './components/dashboard/workLogs/Setlogs';
+import LogsContainer from './components/dashboard/workLogs/LogsContainer';
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(initToken())
-  }, []);
-  const token = sessionStorage.getItem('token');
+
+  const token = useSelector((state) => state.userReducer.token);
   const Role = sessionStorage.getItem('role')
-  console.log(token, "role")
   const auth = sessionStorage.getItem("logIn")
   const [logIn, setLogin] = useState(auth);
-  // useEffect(() => {
-  //   setLogin(token)
-  // }, [])
+  useEffect(() => {
+    dispatch(initToken())
+
+  }, [token]);
 
   // console.log(logIn)
+
   let Routes;
   if (token) {
-    if (Role === "user") {
-      <switch>
-        <Route exact path="/" render={() => <Setlogs />} />
-      </switch>
-    }
     Routes = (
-      <Switch>
-        <Route exact path="/" component={Dashboard} />
-      </Switch>
+      <>
+        <Header setLogin={setLogin} />
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/Worklog" component={LogsContainer} />
+        </Switch>
+      </>
     )
   } else {
     Routes = (
@@ -51,7 +50,7 @@ function App() {
 
     <Router>
       <div className="App">
-        <Header setLogin={setLogin} />
+
         {Routes}
       </div>
     </Router>

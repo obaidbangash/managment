@@ -40,7 +40,14 @@ export const setRole = () => {
         role
     }
 }
-
+// sign out 
+export const SignOut = () => {
+    sessionStorage.removeItem("token");
+    return {
+        type: "SIGN_OUT",
+        token: null
+    }
+}
 
 export const fetchIn = (state, history) => {
     return (dispatch) => {
@@ -55,6 +62,7 @@ export const fetchIn = (state, history) => {
                 sessionStorage.setItem("name", res.data.user.firstName)
                 sessionStorage.setItem("email", res.data.user.email)
                 sessionStorage.setItem("role", res.data.user.roles[0].name)
+                sessionStorage.setItem("id", res.data.user.id)
                 dispatch(postSignIn(res.data))
                 dispatch(setToken(res.data.token));
                 history.push('/')

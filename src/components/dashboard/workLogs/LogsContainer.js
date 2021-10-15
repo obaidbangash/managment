@@ -6,11 +6,11 @@ import UpdateLogs from './UpdateLogs';
 function LogsContainer() {
     const [editLogs, setEditLogs] = useState([])
     const [editModal, seteditModal] = useState(false)
-    console.log(editLogs)
+    const [setModal, setSetModal] = useState(false)
     return (
         <>
-            <button className="btn btn-danger "><i className="fa fa-plus mx-2"></i> Add WorkLogs</button>
-            {/* <Setlogs /> */}
+            <button className="btn btn-danger " onClick={() => setSetModal(true)}><i className="fa fa-plus mx-2"></i> Add WorkLogs</button>
+            {setModal ? <Setlogs setSetModal={setSetModal} /> : null}
             <LogsData setEditLogs={setEditLogs} seteditModal={seteditModal} />
             {editModal ? <UpdateLogs setEditLogs={setEditLogs} editLogs={editLogs} seteditModal={seteditModal} /> : null}
         </>

@@ -35,19 +35,20 @@ function GetUser({ setEditForm, setEditData }) {
             <table className="table table-striped">
                 <thead className="thead-dark bg-dark text-white">
                     <tr>
-                        <th scope="col">Id</th>
+                        <th className="px-3" scope="col">#</th>
                         <th scope="col">FirstName</th>
                         <th scope="col">LastName</th>
                         <th scope="col">Email</th>
                         <th scope="col">Created_at</th>
-                        <th scope="col">Manager</th>
-                        <th scope="col">Working Hrs</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Edit</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">View Logs</th>
+                        <th scope="col" className="text-center">Action</th>
+                        {/* <th scope="col" className="text-center">Edit</th> */}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {Array.isArray(workData) && workData?.map((item, i) => {
+                        console.log(item, "item log")
                         return (
                             <>
                                 <tr key={i}>
@@ -56,14 +57,19 @@ function GetUser({ setEditForm, setEditData }) {
                                     <td>{item.lastName}</td>
                                     <td>{item.email}</td>
                                     <td>{item.created_at}</td>
-                                    <td>{item.manager?.firstName}</td>
-                                    <td>{item.manager?.working_hours}</td>
-                                    <td><button className="btn btn-danger" onClick={() => {
-                                        RemoveUser(item.id)
-                                    }}>Delete</button></td>
-                                    <td><button className="btn btn-danger" onClick={() => {
-                                        EditUser(item)
-                                    }} >Edit</button></td>
+                                    <td>{item.roles[0].name}</td>
+                                    <td><button className="btn">View Logs</button></td>
+                                    <td className="text-center ">
+                                        <i className="fa fa-edit" onClick={() => {
+                                            EditUser(item)
+                                        }} ></i>
+                                        <i className="fa fa-trash mx-2 cursor-pointer" onClick={() => {
+                                            RemoveUser(item.id)
+                                        }}>
+                                        </i>
+
+                                    </td>
+                                    {/* <td className="text-center"> </td> */}
                                 </tr>
                             </>
                         )

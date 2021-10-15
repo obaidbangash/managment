@@ -108,6 +108,12 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 role: action.role
             }
+        // sign out
+        case "SIGN_OUT":
+            return {
+                ...state,
+                token: null
+            }
 
         default:
             return state

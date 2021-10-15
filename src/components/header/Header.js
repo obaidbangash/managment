@@ -1,19 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { SignOut } from '../../redux/action/SignInAction';
 function Header({ setLogin }) {
-    const name = sessionStorage.getItem("name")
-    const signOut = () => {
-        // e.preventDefault()
-        sessionStorage.removeItem("email");
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("role");
-        sessionStorage.removeItem("logIn");
+    const name = sessionStorage.getItem("name");
+    const dispatch = useDispatch();
+    // const signOut = () => {
+    //     // e.preventDefault()
+    //     sessionStorage.removeItem("email");
+    //     sessionStorage.removeItem("token");
+    //     sessionStorage.removeItem("role");
+    //     sessionStorage.removeItem("logIn");
 
-        // sessionStorage.removeItem("token");
-        // sessionStorage.setItem("logIn", false);
-        setLogin(false)
+    //     // sessionStorage.removeItem("token");
+    //     // sessionStorage.setItem("logIn", false);
+    //     setLogin(false)
 
-    }
+    // }
+    let role = sessionStorage.getItem("role")
     return (
         <header className=" bg-dark">
             <nav className="navbar navbar-expand-lg   flex-column">
@@ -35,11 +39,13 @@ function Header({ setLogin }) {
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to={"/"}><i className="fa fa-home"></i>Dashboard</Link>
                         </li>
-                        <li className="nav-item mx-2">
-                            <Link className="nav-link" to={"/sign-in"}>
-                                <i class="fa fa-table"></i>
-                                Table</Link>
-                        </li>
+                        {
+                            role === "admin" ? <li className="nav-item mx-2">
+                                <Link className="nav-link" to={"/Worklog"}>
+                                    <i class="fa fa-table"></i>
+                                    WorkLogs</Link>
+                            </li> : null
+                        }
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to={"/sign-up"}>
                                 <i class="fa fa-edit"></i>
@@ -57,7 +63,7 @@ function Header({ setLogin }) {
                         </li>
 
                         <li className="nav-item mx-2">
-                            <Link className="nav-link" to={"/sign-in"} onClick={() => signOut()}>
+                            <Link className="nav-link" to={"/sign-in"} onClick={() => dispatch(SignOut())}>
                                 <i class="fa fa-sign-out"></i>
                                 Sign Out</Link>
                         </li>

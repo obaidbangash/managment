@@ -5,9 +5,10 @@ function LogsData({ setEditLogs, seteditModal }) {
     const WorkLogs = useSelector(state => state.LogReducer.logData.data);
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token")
+    // let token = sessionStorage.getItem("id")
     useEffect(() => {
         dispatch(GetLogData(token))
-    }, [])
+    }, [token])
 
     return (
         <table className="table table-hover">

@@ -3,7 +3,7 @@ import "./auth.css";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchIn } from "../../redux/action/SignInAction";
-
+import SignUp from "./SignUp";
 // import "./Login.css";
 function SignIn({ setLogin }) {
 
@@ -19,7 +19,6 @@ function SignIn({ setLogin }) {
     const dataObj = { email: "", password: "" }
     const [userData, setUserData] = useState(dataObj);
     const [valid, setValid] = useState(false)
-    // console.log(userData)
     const formHandler = (e) => {
         e.preventDefault();
         // console.log(userData);
@@ -29,59 +28,76 @@ function SignIn({ setLogin }) {
             setValid(false);
             dispatch(fetchIn(userData, history));
             setUserData(dataObj);
-            setLogin(true)
-
+            // setLogin(true)
         }
 
     }
+    const [active, setActive] = useState(true);
+
     useEffect(() => {
         // dispatch(fetchIn(userData, history));
     }, [])
 
     return (
         <div className="auth-wrapper">
-            <div className="auth-inner">
-                <form>
-                    <h3>Sign In</h3>
-                    <div className="form-group">
-                        <label>Email address</label>
-                        <input type="email" className="form-control " value={userData.email} placeholder="Enter email" onChange={(e) => {
-                            const data = { ...userData };
-                            data.email = e.target.value;
-                            setUserData(data)
-                        }} />
-                        {
-                            valid && userData.email == "" ? <span className="text-danger error-span py-2">Email required *</span> : null
-                        }
-                    </div>
+            <div className={!active ? `form-wrapper right-panel-active` : "form-wrapper"}>
+                <SignUp setActive={setActive} />
+                <div class="form-container sign-in-container">
+                    <form>
+                        <h1>Sign in</h1>
+                        <div class="social-container">
+                            <a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
+                            <a href="#" class="social"><i class="fa fa-google"></i></a>
+                            <a href="#" class="social"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                        <span className="useAcount">or use your account</span>
+                        <div className="form-group">
+                            <input type="email" value={userData.email} placeholder="Enter email" onChange={(e) => {
+                                const data = { ...userData };
+                                data.email = e.target.value;
+                                setUserData(data)
+                            }} />
+                            {
+                                valid && userData.email == "" ? <span className="text-danger error-span py-2">Email required *</span> : null
+                            }
+                        </div>
 
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" className="form-control" value={userData.password} placeholder="Enter password" onChange={(e) => {
-                            const data = { ...userData };
-                            data.password = e.target.value;
-                            setUserData(data)
-                        }} />
-                        {
-                            valid && userData.password == "" ? <span className="text-danger error-span py-2">Password required *</span> : null
-                        }
-                    </div>
-
-                    <div className="form-group">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                            <label className="custom-control-label px-1" htmlFor="customCheck1">Remember me</label>
+                        <div className="form-group">
+                            <input type="password" value={userData.password} placeholder="Enter password" onChange={(e) => {
+                                const data = { ...userData };
+                                data.password = e.target.value;
+                                setUserData(data)
+                            }} />
+                            {
+                                valid && userData.password == "" ? <span className="text-danger error-span py-2">Password required *</span> : null
+                            }
+                        </div>
+                        <a href="#">Forgot your password?</a>
+                        <button onClick={(e) => formHandler(e)} >Sign In</button>
+                        {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
+                    </form>
+                </div>
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left">
+                            <h1>Welcome Back!</h1>
+                            <p>To keep connected with us please login with your personal info</p>
+                            <button class="ghost" id="signIn" onClick={() => setActive(true)}>Sign In</button>
+                        </div>
+                        <div class="overlay-panel overlay-right">
+                            <h1>Hello, Friend!</h1>
+                            <p>Enter your personal details and start journey with us</p>
+                            <button class="ghost" id="signUp" onClick={() => setActive(false)}>Sign Up</button>
                         </div>
                     </div>
+                </div>
 
-                    <button onClick={(e) => formHandler(e)} className="btn btn-primary btn-block">Sign In</button>
-                    <p className="forgot-password text-right">
-                        <Link to="/sign-up">Sign Up?</Link>
-                    </p>
-                    {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
-                </form>
+
             </div>
+
+
         </div>
+
     );
 }
 
