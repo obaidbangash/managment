@@ -10,6 +10,7 @@ import { initToken } from './redux/action/SignInAction';
 import { useDispatch, useSelector } from 'react-redux'
 import Setlogs from './components/dashboard/workLogs/Setlogs';
 import LogsContainer from './components/dashboard/workLogs/LogsContainer';
+import { setRole } from './redux/action/SignInAction';
 function App() {
   const dispatch = useDispatch();
 
@@ -21,8 +22,9 @@ function App() {
     dispatch(initToken())
 
   }, [token]);
-
-  // console.log(logIn)
+  useEffect(() => {
+    dispatch(setRole());
+  })
 
   let Routes;
   if (token) {

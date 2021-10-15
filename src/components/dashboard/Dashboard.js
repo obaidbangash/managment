@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import CreateUser from "./CreateUser";
 import EditUser from './EditUser';
 import GetUser from './GetUser';
@@ -12,10 +13,10 @@ function Dashboard() {
     const [editForm, setEditForm] = useState(false);
     const [editData, setEditData] = useState({})
     let role = sessionStorage.getItem("role")
-
+    const { userReducer: { User: { roles } } } = useSelector(state => state);
+    console.log(roles[0].name, "rolleeeeeee")
     return (
         <>
-
             {
                 role === "admin" ?
                     <><section className="main-section">

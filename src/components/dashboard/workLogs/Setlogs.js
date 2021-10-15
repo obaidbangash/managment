@@ -5,7 +5,6 @@ import { GetLogData } from '../../../redux/action/GetLogs';
 function Setlogs({ setSetModal }) {
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
-    let id = sessionStorage.getItem("id");
 
     const dataObj = { logDate: "", hours: "", description: "", }
     const [edit, setEdit] = useState(dataObj)

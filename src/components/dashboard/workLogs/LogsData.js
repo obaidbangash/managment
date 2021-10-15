@@ -6,7 +6,6 @@ function LogsData({ setEditLogs, seteditModal }) {
     const Id = useSelector(state => state.LogReducer.logId);
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token")
-    // let token = sessionStorage.getItem("id")
     useEffect(() => {
         Id ? dispatch(GetSpecLogData(Id, token)) : dispatch(GetLogData(token))
     }, [token, Id])

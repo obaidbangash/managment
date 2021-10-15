@@ -33,11 +33,12 @@ export const initToken = () => {
         token: token === 'undefined' ? undefined : token
     }
 }
-export const setRole = () => {
-    const role = sessionStorage.getItem("role");
+export const setRole = (role) => {
+    // const role = sessionStorage.getItem("role");
     return {
         type: "ROLE",
         role
+
     }
 }
 // sign out 
@@ -58,11 +59,13 @@ export const fetchIn = (state, history) => {
             },
         })
             .then((res) => {
+                console.log(res)
                 sessionStorage.setItem("token", res.data.token)
                 sessionStorage.setItem("name", res.data.user.firstName)
                 sessionStorage.setItem("email", res.data.user.email)
                 sessionStorage.setItem("role", res.data.user.roles[0].name)
-                sessionStorage.setItem("id", res.data.user.id)
+                sessionStorage.setItem("id", res.data.user.id);
+                dispatch(setRole(res?.data?.user?.roles[0]?.name))
                 dispatch(postSignIn(res.data))
                 dispatch(setToken(res.data.token));
                 history.push('/')

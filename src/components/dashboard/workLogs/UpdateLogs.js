@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { PostLogs } from '../../../redux/action/CreateLogs';
 import { Update_Logs } from '../../../redux/action/EditLogs';
-import { GetLogData } from '../../../redux/action/GetLogs';
+// import { setLogID } from '../../redux/action/GetLogs';
+import { GetLogData } from '../../../redux/action/GetLogs'
+import { GetSpecLogData } from '../../../redux/action/GetLogs';
 function UpdateLogs({ setEditLogs, editLogs, seteditModal }) {
     const error = useSelector(state => state.LogReducer.error)
     const dispatch = useDispatch();
@@ -11,8 +13,8 @@ function UpdateLogs({ setEditLogs, editLogs, seteditModal }) {
     const [edit, setEdit] = useState(editLogs)
     const [valid, setValid] = useState(false)
     // const page = useSelector((state) => state.Pagenation.page);
+    const Id = useSelector(state => state.LogReducer.logId);
 
-    // console.log(edit)
     const formHandler = (e) => {
         e.preventDefault();
 
@@ -21,9 +23,9 @@ function UpdateLogs({ setEditLogs, editLogs, seteditModal }) {
 
         } else {
             setValid(false)
-            dispatch(Update_Logs(edit, token))
-            dispatch(GetLogData(token))
-
+            dispatch(Update_Logs(Id, edit, token))
+            // dispatch(GetLogData(token))
+            Id ? dispatch(GetSpecLogData(Id, token)) : dispatch(GetLogData(token))
         }
     }
     return (
