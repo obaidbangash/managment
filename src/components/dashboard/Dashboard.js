@@ -18,7 +18,7 @@ function Dashboard() {
             <section className="main-section">
                 {
                     role === "admin" ? <>
-                        <button onClick={() => setCreateUser(true)} className="btn btn-danger">Create User </button>
+                        <button onClick={() => setCreateUser(true)} className="btn btn-danger"><i className="fa fa-plus mx-2"> </i>Create User</button>
                         <GetUser setEditForm={setEditForm} setEditData={setEditData} />
                         {createUser ? <CreateUser setCreateUser={setCreateUser} /> : null}
                         {editForm ? <EditUser setEditForm={setEditForm} editData={editData} setEditData={setEditData} /> : null}

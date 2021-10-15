@@ -9,7 +9,7 @@ function LogsContainer() {
     console.log(editLogs)
     return (
         <>
-
+            <button className="btn btn-danger "><i className="fa fa-plus mx-2"></i> Add WorkLogs</button>
             {/* <Setlogs /> */}
             <LogsData setEditLogs={setEditLogs} seteditModal={seteditModal} />
             {editModal ? <UpdateLogs setEditLogs={setEditLogs} editLogs={editLogs} seteditModal={seteditModal} /> : null}

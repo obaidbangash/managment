@@ -4,10 +4,10 @@ export const EditLoading = () => {
         type: "UPDATE_LOADING"
     }
 }
-export const UpdateLog = (user) => {
+export const UpdateLog = (logData) => {
     return {
         type: "UPDATE_LOG_SUCCESS",
-        payload: user.user
+        payload: logData
     }
 }
 export const UpdateLogError = (error) => {

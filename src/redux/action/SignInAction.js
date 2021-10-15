@@ -52,6 +52,7 @@ export const fetchIn = (state, history) => {
         })
             .then((res) => {
                 sessionStorage.setItem("token", res.data.token)
+                sessionStorage.setItem("name", res.data.user.firstName)
                 sessionStorage.setItem("email", res.data.user.email)
                 sessionStorage.setItem("role", res.data.user.roles[0].name)
                 dispatch(postSignIn(res.data))

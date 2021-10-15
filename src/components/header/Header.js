@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 function Header({ setLogin }) {
-
+    const name = sessionStorage.getItem("name")
     const signOut = () => {
         // e.preventDefault()
         sessionStorage.removeItem("email");
@@ -15,26 +15,53 @@ function Header({ setLogin }) {
 
     }
     return (
-        <header className="fixed-top bg-dark">
-            <nav className="navbar navbar-expand-lg navbar-light ">
-                <div className="container">
-                    <Link className="navbar-brand" to={"/"}>Time Management</Link>
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                        <ul className="navbar-nav mx-auto">
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={"/"}><b>Dashboard</b></Link>
-                            </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={"/sign-in"}><b>Login</b></Link>
-                            </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={"/sign-up"}><b>Sign up</b></Link>
-                            </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={"/sign-in"} onClick={() => signOut()}><b>Sign Out</b></Link>
-                            </li>
-                        </ul>
+        <header className=" bg-dark">
+            <nav className="navbar navbar-expand-lg   flex-column">
+                <Link className="navbar-brand" to={"/"}>
+                    <i className="fa fa-paw mx-2"></i>
+                    Time Management</Link>
+
+                <div className="profile clearfix">
+                    <div className="profile_pic">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3011/3011270.png" alt="..." className="img-circle profile_img" />
                     </div>
+                    <div className="profile_info">
+                        <span>Welcome,</span>
+                        <h2>{name}</h2>
+                    </div>
+                </div>
+                <div className="collapse navbar-collapse w-100 mt-5" id="navbarTogglerDemo02">
+                    <ul className="navbar-nav mx-auto flex-column w-100">
+                        <li className="nav-item mx-2">
+                            <Link className="nav-link" to={"/"}><i className="fa fa-home"></i>Dashboard</Link>
+                        </li>
+                        <li className="nav-item mx-2">
+                            <Link className="nav-link" to={"/sign-in"}>
+                                <i class="fa fa-table"></i>
+                                Table</Link>
+                        </li>
+                        <li className="nav-item mx-2">
+                            <Link className="nav-link" to={"/sign-up"}>
+                                <i class="fa fa-edit"></i>
+                                Create User</Link>
+                        </li>
+                        <li className="nav-item mx-2">
+                            <Link className="nav-link" to={"/"}>
+                                <i class="fa fa-bar-chart-o"></i>
+                                Forms</Link>
+                        </li>
+                        <li className="nav-item mx-2">
+                            <Link className="nav-link" to={"/"}>
+                                <i class="fa fa-clone"></i>
+                                Layouts</Link>
+                        </li>
+
+                        <li className="nav-item mx-2">
+                            <Link className="nav-link" to={"/sign-in"} onClick={() => signOut()}>
+                                <i class="fa fa-sign-out"></i>
+                                Sign Out</Link>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </header>
