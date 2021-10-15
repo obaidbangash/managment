@@ -16,7 +16,12 @@ export const GetLogError = (error) => {
         payload: error
     }
 }
-
+export const setLogID = (id) => {
+    return {
+        type: "LOG_ID",
+        payload: id
+    }
+}
 
 export const GetLogData = (token) => {
     return (dispatch) => {
@@ -29,6 +34,23 @@ export const GetLogData = (token) => {
         })
             .then((res) => {
                 dispatch(GetLogSuccess(res.data.workLogs))
+            })
+            .catch(error => {
+                dispatch(GetLogError(error.response?.data))
+            })
+    }
+}
+export const GetSpecLogData = (id, token) => {
+    return (dispatch) => {
+        dispatch(GetLogLoading())
+        axios.get(`http://34.210.129.167/api/user/${id}/work-logs`, {
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                "Authorization": `Bearer ${token}`
+            },
+        })
+            .then((res) => {
+                dispatch(GetLogSuccess(res.data.workLogs));
             })
             .catch(error => {
                 dispatch(GetLogError(error.response?.data))

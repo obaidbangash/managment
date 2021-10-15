@@ -70,7 +70,7 @@ function UpdateLogs({ setEditLogs, editLogs, seteditModal }) {
                             }
                         </div>
                         <button onClick={(e) => formHandler(e)} className="btn btn-primary btn-block">Update Log</button>
-                        {error ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
+                        {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
                     </form>
                 </div>
             </div>

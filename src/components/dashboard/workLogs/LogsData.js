@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { GetLogData } from '../../../redux/action/GetLogs';
+import { GetLogData, GetSpecLogData } from '../../../redux/action/GetLogs';
 function LogsData({ setEditLogs, seteditModal }) {
     const WorkLogs = useSelector(state => state.LogReducer.logData.data);
+    const Id = useSelector(state => state.LogReducer.logId);
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token")
     // let token = sessionStorage.getItem("id")
     useEffect(() => {
-        dispatch(GetLogData(token))
-    }, [token])
+        Id ? dispatch(GetSpecLogData(Id, token)) : dispatch(GetLogData(token))
+    }, [token, Id])
 
     return (
         <table className="table table-hover">

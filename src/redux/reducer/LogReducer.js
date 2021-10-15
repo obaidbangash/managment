@@ -3,7 +3,8 @@ const initialState = {
     log: [],
     error: "",
     logData: [],
-    getLogError: ""
+    getLogError: "",
+    logId: undefined
 }
 const LogReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -57,6 +58,11 @@ const LogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+        case "LOG_ID":
+            return {
+                ...state,
+                logId: action.payload
             }
         default:
             return state

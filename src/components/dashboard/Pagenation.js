@@ -18,13 +18,16 @@ function Pagenation() {
                     <li className={`page-item ${page <= 1 ? "disabled" : ''}`}>
                         <span className='page-link' style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page - 1))}>Previous</span>
                     </li>
-                    <li className={`page-item ${page === page ? '' : ''}`} >
+                    {page > 1 ? <li className={`page-item`} >
+                        <span className="page-link" style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page - 1))}>{page - 1}</span>
+                    </li> : null}
+                    <li className={`page-item ${page === page ? 'active' : ''}`} >
                         <span className="page-link" style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page))}>{page}</span>
                     </li>
-                    {/* {totalPages.map((p, i) => <li key={i} className={`page-item ${p === page ? 'active' : ''}`} aria-current="page">
-                        <span className="page-link" style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(p))}>{p}</span>
-                    </li>
-                    )} */}
+                    {totalPages.length > page ? <li className={`page-item`} >
+                        <span className="page-link" style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page + 1))}>{page + 1}</span>
+                    </li> : null}
+
                     <li className={`page-item ${page === totalPages.length ? "disabled" : ''}`}>
                         <span className={`page-link`} style={{ cursor: 'pointer' }} onClick={() => dispatch(set_page(page + 1))}>Next</span>
                     </li>

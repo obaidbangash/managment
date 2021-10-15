@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
 import { getUsers } from '../../redux/action/GetUser';
+import { setLogID } from '../../redux/action/GetLogs';
 import { DeleteUser } from '../../redux/action/DeleteAction';
 // import { UpdateUser } from '../../redux/action/UpdateAction';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllData } from "../../redux/action/PaginationAction";
 import Pagenation from "./Pagenation";
+import { useHistory } from 'react-router-dom';
 function GetUser({ setEditForm, setEditData }) {
+    const history = useHistory();
     const user = useSelector(state => state.userReducer.users);
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
@@ -58,7 +61,10 @@ function GetUser({ setEditForm, setEditData }) {
                                     <td>{item.email}</td>
                                     <td>{item.created_at}</td>
                                     <td>{item.roles[0].name}</td>
-                                    <td><button className="btn">View Logs</button></td>
+                                    <td><button className="btn" onClick={() => {
+                                        dispatch(setLogID(item.id))
+                                        history.push('/Worklog')
+                                    }}>View Logs</button></td>
                                     <td className="text-center ">
                                         <i className="fa fa-edit" onClick={() => {
                                             EditUser(item)

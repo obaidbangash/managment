@@ -30,8 +30,9 @@ function App() {
       <>
         <Header setLogin={setLogin} />
         <Switch>
-          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/Dashboard" component={Dashboard} />
           <Route path="/Worklog" component={LogsContainer} />
+          <Redirect from='/' to='/Dashboard' />
         </Switch>
       </>
     )
