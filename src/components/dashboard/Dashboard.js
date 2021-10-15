@@ -15,27 +15,30 @@ function Dashboard() {
 
     return (
         <>
-            <section className="main-section">
-                {
-                    role === "admin" ?
-                        <>
-                            <button onClick={() => setCreateUser(true)} className="btn btn-danger"><i className="fa fa-plus mx-2"> </i>Create User</button>
-                            <GetUser setEditForm={setEditForm} setEditData={setEditData} />
-                            {createUser ? <CreateUser setCreateUser={setCreateUser} /> : null}
-                            {editForm ? <EditUser setEditForm={setEditForm} editData={editData} setEditData={setEditData} /> : null}
-                        </> : role === "manager" ? <>
+
+            {
+                role === "admin" ?
+                    <><section className="main-section">
+                        <button onClick={() => setCreateUser(true)} className="btn btn-danger"><i className="fa fa-plus mx-2"> </i>Create User</button>
+                        <GetUser setEditForm={setEditForm} setEditData={setEditData} />
+                        {createUser ? <CreateUser setCreateUser={setCreateUser} /> : null}
+                        {editForm ? <EditUser setEditForm={setEditForm} editData={editData} setEditData={setEditData} /> : null}
+                    </section>
+                    </> : role === "manager" ? <>
+                        <section className="main-section">
                             <button onClick={() => setCreateUser(true)} className="btn btn-danger">Create User </button>
                             <ManagerDate setEditForm={setEditForm} setEditData={setEditData} />
                             {createUser ? <CreateUser setCreateUser={setCreateUser} /> : null}
                             {editForm ? <EditUser setEditForm={setEditForm} editData={editData} setEditData={setEditData} /> : null}
-                        </> : <>
-                            <LogsContainer />
-                        </>
-                }
+                        </section>
+                    </> : <>
+                        <LogsContainer />
+                    </>
+            }
 
 
 
-            </section>
+
         </>
     )
 }
