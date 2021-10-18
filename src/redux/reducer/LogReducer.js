@@ -4,7 +4,11 @@ const initialState = {
     error: "",
     logData: [],
     getLogError: "",
-    logId: undefined
+    logId: undefined,
+    PerferedHours: {},
+    PatchError: "",
+    deleteLogError: "",
+    filterError: ""
 }
 const LogReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -64,6 +68,36 @@ const LogReducer = (state = initialState, action) => {
                 ...state,
                 logId: action.payload
             }
+        // perfered hours
+
+        case "PATCH_ERROR":
+            return {
+                ...state,
+                PatchError: action.payload
+            }
+        // delete logs
+        case "DELETE_LOG_SUCCESS":
+            return {
+                ...state,
+                logData: action.payload,
+            }
+        case "DELETE_LOG_ERROR":
+            return {
+                ...state,
+                deleteLogError: action.payload
+            }
+        // filter reducer
+        case "FILTER_SUCCESS":
+            return {
+                ...state,
+                logData: action.payload,
+            }
+        case "FILTER_ERROR":
+            return {
+                ...state,
+                filterError: action.payload
+            }
+
         default:
             return state
     }

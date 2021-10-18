@@ -13,8 +13,8 @@ function Dashboard() {
     const [editForm, setEditForm] = useState(false);
     const [editData, setEditData] = useState({})
     let role = sessionStorage.getItem("role")
-    const { userReducer: { User: { roles } } } = useSelector(state => state);
-    console.log(roles[0].name, "rolleeeeeee")
+    // const { userReducer: { User: { roles } } } = useSelector(state => state);
+    // console.log(roles[0].name, "rolleeeeeee")
     return (
         <>
             {
