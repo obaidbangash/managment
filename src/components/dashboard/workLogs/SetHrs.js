@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { PatchGet } from '../../../redux/action/PreferedHours';
 import { useDispatch, useSelector } from "react-redux";
-import { GetLogData, GetSpecLogData } from '../../../redux/action/GetLogs';
+import { GetLogData, GetSpecLogData, PatchGet } from '../../../redux/action/Worklogs';
 function SetHrs() {
     const [preferedHrs, setPreferedHrs] = useState('');
     const dispatch = useDispatch()

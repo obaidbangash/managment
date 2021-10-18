@@ -1,6 +1,5 @@
 export const fetch_workLog = (token, page) => (dispatch) => {
-    console.log("token worklog", token);
-    console.log("token worklog", page);
+
     console.log("inside Fetch");
     fetch(`http://34.210.129.167/api/work-logs?page=${page}`, {
         method: 'GET',
@@ -17,7 +16,6 @@ export const fetch_workLog = (token, page) => (dispatch) => {
 
 
 export const set_workLog = (data) => {
-    console.log("data of set worklog", data.last_page);
     return {
         type: "SET_WORKLOG",
         workLog: data.data,

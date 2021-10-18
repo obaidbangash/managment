@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FilterLogs } from '../../../redux/action/LogsFilter';
+import { FilterLogs } from '../../../redux/action/Worklogs';
 import { useDispatch, useSelector } from "react-redux"
 function FilterLog({ setFilterModal }) {
     const dispatch = useDispatch()

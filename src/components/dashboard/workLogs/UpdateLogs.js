@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { PostLogs } from '../../../redux/action/CreateLogs';
-import { Update_Logs } from '../../../redux/action/EditLogs';
-// import { setLogID } from '../../redux/action/GetLogs';
-import { GetLogData } from '../../../redux/action/GetLogs'
-import { GetSpecLogData } from '../../../redux/action/GetLogs';
-function UpdateLogs({ setEditLogs, editLogs, seteditModal }) {
+import { Update_Logs } from '../../../redux/action/Worklogs';
+function UpdateLogs({ editLogs, seteditModal }) {
     const error = useSelector(state => state.LogReducer.error)
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
@@ -24,8 +20,6 @@ function UpdateLogs({ setEditLogs, editLogs, seteditModal }) {
         } else {
             setValid(false)
             dispatch(Update_Logs(Id, edit, token))
-            // dispatch(GetLogData(token))
-            Id ? dispatch(GetSpecLogData(Id, token)) : dispatch(GetLogData(token))
         }
     }
     return (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { GetLogData, GetSpecLogData } from '../../../redux/action/GetLogs';
-import { DeleteWorkLogs } from '../../../redux/action/DeleteLogs';
+import { GetLogData, GetSpecLogData, DeleteWorkLogs } from '../../../redux/action/Worklogs';
 function LogsData({ setEditLogs, seteditModal }) {
     const WorkLogs = useSelector(state => state.LogReducer.logData.data);
     const Id = useSelector(state => state.LogReducer.logId);
