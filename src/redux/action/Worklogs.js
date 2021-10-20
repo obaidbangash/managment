@@ -193,18 +193,24 @@ export const Update_Logs = (id, state, token) => {
                 'Content-type': 'application/json; charset=UTF-8',
                 "Authorization": `Bearer ${token}`
             },
-        }) : axios.put(`http://34.210.129.167/api/user/${id}/work-logs/${state.id}`, state, {
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-                "Authorization": `Bearer ${token}`
-            },
         })
             .then((res) => {
-                dispatch(UpdateLog(res.data.workLogs))
+                dispatch(GetLogData(token))
             })
             .catch(error => {
                 dispatch(UpdateLogError(error.response?.data))
+            }) : axios.put(`http://34.210.129.167/api/user/${id}/work-logs/${state.id}`, state, {
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    "Authorization": `Bearer ${token}`
+                },
             })
+                .then((res) => {
+                    dispatch(GetLogData(token))
+                })
+                .catch(error => {
+                    dispatch(UpdateLogError(error.response?.data))
+                })
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { getUsers } from '../../redux/action/GetUser';
-import { setLogID } from '../../redux/action/GetLogs';
+import { setLogID } from '../../redux/action/Worklogs';
 import { DeleteUser } from '../../redux/action/DeleteAction';
 // import { UpdateUser } from '../../redux/action/UpdateAction';
 import { useSelector, useDispatch } from "react-redux";
