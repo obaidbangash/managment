@@ -2,33 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./auth.css";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchIn } from "../../redux/action/SignInAction";
+import { fetchIn } from "../../redux/action/userAction";
 import SignUp from "./SignUp";
-// import "./Login.css";
 function SignIn({ setLogin }) {
 
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.userReducer.User);
     const error = useSelector(state => state.userReducer.error);
-
-    // console.log(user, error, "error")
     const history = useHistory();
-
-
     const dataObj = { email: "", password: "" }
     const [userData, setUserData] = useState(dataObj);
     const [valid, setValid] = useState(false)
     const formHandler = (e) => {
         e.preventDefault();
-        // console.log(userData);
         if (userData.email.length < 1 || userData.password.length < 1) {
             setValid(true);
         } else {
             setValid(false);
             dispatch(fetchIn(userData, history));
             setUserData(dataObj);
-            // setLogin(true)
         }
 
     }

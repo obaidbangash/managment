@@ -5,10 +5,8 @@ function UpdateLogs({ editLogs, seteditModal }) {
     const error = useSelector(state => state.LogReducer.error)
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
-    // const dataObj = { logDate: "", hours: "", description: "", }
     const [edit, setEdit] = useState(editLogs)
     const [valid, setValid] = useState(false)
-    // const page = useSelector((state) => state.Pagenation.page);
     const Id = useSelector(state => state.LogReducer.logId);
 
     const formHandler = (e) => {

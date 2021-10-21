@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
-import { getUsers } from '../../redux/action/GetUser';
+import React, { useEffect } from 'react';
 import { setLogID } from '../../redux/action/Worklogs';
-import { DeleteUser } from '../../redux/action/DeleteAction';
-// import { UpdateUser } from '../../redux/action/UpdateAction';
+import { DeleteUser, getUsers } from '../../redux/action/userAction';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllData } from "../../redux/action/PaginationAction";
 import Pagenation from "./Pagenation";
@@ -61,10 +59,10 @@ function GetUser({ setEditForm, setEditData }) {
                                     <td>{item.email}</td>
                                     <td>{item.created_at}</td>
                                     <td>{item.roles[0].name}</td>
-                                    <td><button className="btn" onClick={() => {
+                                    <td>{item.roles[0].name === "user" ? <button className="btn" onClick={() => {
                                         dispatch(setLogID(item.id))
                                         history.push('/Worklog')
-                                    }}>View Logs</button></td>
+                                    }}>View Logs</button> : <button className="btn" > no Logs</button>}</td>
                                     <td className="text-center ">
                                         <i className="fa fa-edit" onClick={() => {
                                             EditUser(item)

@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { UpdateUser } from "../../redux/action/UpdateAction"
+import { UpdateUser, getUsers } from "../../redux/action/userAction"
 import { getAllData } from "../../redux/action/PaginationAction"
-import { getUsers } from "../../redux/action/GetUser"
 function EditUser({ setEditForm, setEditData, editData }) {
-    // const user = useSelector(state => state.userReducer.updateUser);
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
-
-    // console.log(user, "usasdaser")
     const dataObj = { firstName: "", lastName: "", email: "", password: "", password_confirmation: "" }
     const [edit, setEdit] = useState(editData)
     const [valid, setValid] = useState(false)
     const page = useSelector((state) => state.Pagenation.page);
-
-    // console.log(edit)
     const formHandler = (e) => {
         e.preventDefault();
-
         if (edit.firstName.length < 1 || edit.lastName.length < 1 || edit.email.length < 1 || edit.password.length < 1 || edit.password_confirmation.length < 1) {
             setValid(true);
 
@@ -27,8 +20,6 @@ function EditUser({ setEditForm, setEditData, editData }) {
             dispatch(UpdateUser(edit))
             dispatch(getAllData(token, page));
             dispatch(getUsers(token));
-
-
         }
     }
     return (
