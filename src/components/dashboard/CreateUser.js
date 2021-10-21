@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 
-import { Createusers } from '../../redux/action/CreateUser';
-import { getUsers } from '../../redux/action/GetUser';
+import { Createusers, getUsers } from '../../redux/action/userAction';
 function CreateUser({ setCreateUser }) {
     const formError = useSelector(state => state.userReducer.EserError);
     // dispatch 

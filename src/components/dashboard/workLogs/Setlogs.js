@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { PostLogs } from '../../../redux/action/CreateLogs';
-import { GetLogData } from '../../../redux/action/GetLogs';
+import { GetLogData, PostLogs } from '../../../redux/action/Worklogs';
 function Setlogs({ setSetModal }) {
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import { getUsers } from '../../redux/action/GetUser';
-import { DeleteUser } from '../../redux/action/DeleteAction';
-// import { UpdateUser } from '../../redux/action/UpdateAction';
+import { DeleteUser, getUsers } from '../../redux/action/userAction';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllData } from "../../redux/action/PaginationAction";
 import Pagenation from "./Pagenation";
@@ -28,7 +26,6 @@ function ManagerDate({ setEditData, setEditForm }) {
     const EditUser = (state) => {
         setEditData(state)
         setEditForm(true)
-        // dispatch(UpdateUser(state))
     }
 
     return (

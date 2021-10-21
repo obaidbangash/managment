@@ -6,11 +6,11 @@ import SignUp from "./components/auth/SignUp";
 import Header from './components/header/Header';
 import Dashboard from './components/dashboard/Dashboard';
 import SignIn from './components/auth/SignIn';
-import { initToken } from './redux/action/SignInAction';
+import { initToken } from './redux/action/userAction';
 import { useDispatch, useSelector } from 'react-redux'
 import Setlogs from './components/dashboard/workLogs/Setlogs';
 import LogsContainer from './components/dashboard/workLogs/LogsContainer';
-import { setRole } from './redux/action/SignInAction';
+import { setRole } from './redux/action/userAction';
 function App() {
   const dispatch = useDispatch();
 

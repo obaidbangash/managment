@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { SignOut } from '../../redux/action/SignInAction';
+import { SignOut } from '../../redux/action/userAction';
 function Header({ setLogin }) {
     const name = sessionStorage.getItem("name");
     const dispatch = useDispatch();
