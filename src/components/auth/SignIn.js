@@ -11,8 +11,6 @@ function SignIn({ setLogin }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.userReducer.User);
     const error = useSelector(state => state.userReducer.error);
-
-    // console.log(user, error, "error")
     const history = useHistory();
 
 
