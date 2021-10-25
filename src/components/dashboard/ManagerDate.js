@@ -47,23 +47,21 @@ function ManagerDate({ setEditData, setEditForm }) {
                 <tbody>
                     {Array.isArray(user) && user?.map((item, i) => {
                         return (
-                            <>
-                                <tr key={i}>
-                                    <th scope="row">{item.id}</th>
-                                    <td>{item.firstName}</td>
-                                    <td>{item.lastName}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.created_at}</td>
-                                    <td>{item.manager?.firstName}</td>
-                                    <td>{item.manager?.working_hours}</td>
-                                    <td><button className="btn btn-danger" onClick={() => {
-                                        RemoveUser(item.id)
-                                    }}>Delete</button></td>
-                                    <td><button className="btn btn-danger" onClick={() => {
-                                        EditUser(item)
-                                    }} >Edit</button></td>
-                                </tr>
-                            </>
+                            <tr key={i}>
+                                <th scope="row">{item.id}</th>
+                                <td>{item.firstName}</td>
+                                <td>{item.lastName}</td>
+                                <td>{item.email}</td>
+                                <td>{item.created_at}</td>
+                                <td>{item.manager?.firstName}</td>
+                                <td>{item.manager?.working_hours}</td>
+                                <td><button className="btn btn-danger" onClick={() => {
+                                    RemoveUser(item.id)
+                                }}>Delete</button></td>
+                                <td><button className="btn btn-danger" onClick={() => {
+                                    EditUser(item)
+                                }} >Edit</button></td>
+                            </tr>
                         )
 
                     })
