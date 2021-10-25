@@ -13,7 +13,6 @@ export const set_page = (page) => {
 }
 
 export const getAllData = (token, page) => (dispatch) => {
-    console.log(token, page, "tokeeeen page")
     fetch(`http://34.210.129.167/api/users?page=${page}`, {
         method: 'GET',
         headers: {
@@ -23,7 +22,6 @@ export const getAllData = (token, page) => (dispatch) => {
     })
         .then((json) => json.json())
         .then((response) => {
-            console.log(response, response.users, "hello user")
             dispatch(get_user(response.users))
         })
         .catch((err) => console.log(err))

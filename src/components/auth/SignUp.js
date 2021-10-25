@@ -17,8 +17,6 @@ function SignUp({ setLogin, setActive }) {
 
     const formHandler = (e) => {
         e.preventDefault();
-
-        console.log(userData, "data");
         if (userData.firstName.length < 1 || userData.lastName.length < 1 || userData.email.length < 1 || userData.password.length < 1 || userData.password_confirmation.length < 1) {
             setValid(true);
             // dispatch(fetchPost(userData))

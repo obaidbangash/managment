@@ -16,7 +16,6 @@ function GetUser({ setEditForm, setEditData }) {
 
     const workData = useSelector(state => state.Pagenation.users);
     const page = useSelector((state) => state.Pagenation.page)
-    const totalPages = useSelector((state) => state.Pagenation.AllPages)
     useEffect(() => {
         dispatch(getAllData(token, page));
     }, [token, page])
@@ -28,7 +27,6 @@ function GetUser({ setEditForm, setEditData }) {
     const EditUser = (state) => {
         setEditData(state)
         setEditForm(true)
-        // dispatch(UpdateUser(state))
     }
 
     return (
@@ -49,7 +47,6 @@ function GetUser({ setEditForm, setEditData }) {
                 </thead>
                 <tbody >
                     {Array.isArray(workData) && workData?.map((item, i) => {
-                        console.log(item, "item log")
                         return (
                             <>
                                 <tr key={i}>
@@ -73,7 +70,6 @@ function GetUser({ setEditForm, setEditData }) {
                                         </i>
 
                                     </td>
-                                    {/* <td className="text-center"> </td> */}
                                 </tr>
                             </>
                         )

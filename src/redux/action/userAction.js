@@ -141,7 +141,6 @@ export const fetchPost = (state, history) => {
             },
         })
             .then((res) => {
-                // console.log(res)
                 dispatch(PostSuccess(res.data))
                 history.push('/sign-in')
             })
@@ -189,7 +188,6 @@ export const fetchIn = (state, history) => {
             },
         })
             .then((res) => {
-                console.log(res)
                 sessionStorage.setItem("token", res.data.token)
                 sessionStorage.setItem("name", res.data.user.firstName)
                 sessionStorage.setItem("email", res.data.user.email)
@@ -220,7 +218,6 @@ export const Createusers = (state, token) => {
             },
         })
             .then((res) => {
-                console.log(res)
                 dispatch(Create_user(res.data))
             })
             .catch(error => {
@@ -260,7 +257,6 @@ export const getUsers = (token) => {
             }
         })
             .then((res) => {
-                // console.log(res.data.users.data);
                 dispatch(GetSuccess(res.data.users.data))
             })
             .catch(error => {

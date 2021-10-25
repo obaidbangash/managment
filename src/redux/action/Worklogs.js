@@ -74,7 +74,6 @@ const FilterError = (error) => {
 }
 
 export const FilterLogs = (from, to) => {
-    console.log(from, to)
     const token = sessionStorage.getItem("token")
     return (dispatch) => {
         dispatch(Loading())
@@ -173,7 +172,6 @@ export const PostLogs = (state, token) => {
                 "Authorization": `Bearer ${token}`
             },
         }).then((res) => {
-            console.log(res)
             dispatch(LogsSuccess(res.data))
         })
             .catch(error => {

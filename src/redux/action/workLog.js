@@ -1,6 +1,4 @@
 export const fetch_workLog = (token, page) => (dispatch) => {
-
-    console.log("inside Fetch");
     fetch(`http://34.210.129.167/api/work-logs?page=${page}`, {
         method: 'GET',
         headers: {
