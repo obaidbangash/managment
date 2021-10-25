@@ -23,7 +23,7 @@ function Setlogs({ setSetModal }) {
             <div className="auth-wrapper create-user">
 
                 <div className="auth-inner">
-                    <div class="close-btn" onClick={() => setSetModal(false)}>  <i class="fa fa-close"> </i></div>
+                    <div className="close-btn" onClick={() => setSetModal(false)}>  <i className="fa fa-close"> </i></div>
                     <form>
                         <h3>Create WorkLogs</h3>
                         <div className="form-group">

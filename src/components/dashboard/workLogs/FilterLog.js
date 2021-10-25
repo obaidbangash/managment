@@ -13,7 +13,7 @@ function FilterLog({ setFilterModal }) {
         <>
             <div className="auth-wrapper create-user">
                 <div className="auth-inner">
-                    <div class="close-btn" onClick={() => setFilterModal(false)}>  <i class="fa fa-close"> </i></div>
+                    <div className="close-btn" onClick={() => setFilterModal(false)}>  <i className="fa fa-close"> </i></div>
                     <form>
                         <h3>Filter by date</h3>
                         <div className="form-group">

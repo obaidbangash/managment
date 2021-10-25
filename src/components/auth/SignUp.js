@@ -31,13 +31,13 @@ function SignUp({ setLogin, setActive }) {
         }
     }
     return (
-        <div class="form-container sign-up-container">
+        <div className="form-container sign-up-container">
             <form>
                 <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fa fa-google"></i></a>
-                    <a href="#" class="social"><i class="fa fa-linkedin"></i></a>
+                <div className="social-container">
+                    <a href="#" className="social"><i className="fa fa-facebook-f"></i></a>
+                    <a href="#" className="social"><i className="fa fa-google"></i></a>
+                    <a href="#" className="social"><i className="fa fa-linkedin"></i></a>
                 </div>
                 <span className="useAcount">or use your email for registration</span>
                 <div className="form-group">

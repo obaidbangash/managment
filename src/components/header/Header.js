@@ -42,29 +42,29 @@ function Header({ setLogin }) {
                         {
                             role === "admin" ? <li className="nav-item mx-2">
                                 <Link className="nav-link" to={"/Worklog"}>
-                                    <i class="fa fa-table"></i>
+                                    <i className="fa fa-table"></i>
                                     WorkLogs</Link>
                             </li> : null
                         }
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to={"/sign-up"}>
-                                <i class="fa fa-edit"></i>
+                                <i className="fa fa-edit"></i>
                                 Create User</Link>
                         </li>
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to={"/"}>
-                                <i class="fa fa-bar-chart-o"></i>
+                                <i className="fa fa-bar-chart-o"></i>
                                 Forms</Link>
                         </li>
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to={"/"}>
-                                <i class="fa fa-clone"></i>
+                                <i className="fa fa-clone"></i>
                                 Layouts</Link>
                         </li>
 
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to={"/sign-in"} onClick={() => dispatch(SignOut())}>
-                                <i class="fa fa-sign-out"></i>
+                                <i className="fa fa-sign-out"></i>
                                 Sign Out</Link>
                         </li>
                     </ul>
