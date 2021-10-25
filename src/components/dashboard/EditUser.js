@@ -9,6 +9,8 @@ function EditUser({ setEditForm, setEditData, editData }) {
     const [edit, setEdit] = useState(editData)
     const [valid, setValid] = useState(false)
     const page = useSelector((state) => state.Pagenation.page);
+    const error = useSelector(state => state.userReducer.UpdateError)
+    console.log(error)
     const formHandler = (e) => {
         e.preventDefault();
         if (edit.firstName.length < 1 || edit.lastName.length < 1 || edit.email.length < 1 || edit.password.length < 1 || edit.password_confirmation.length < 1) {
@@ -86,7 +88,7 @@ function EditUser({ setEditForm, setEditData, editData }) {
                             }
                         </div>
                         <button onClick={(e) => formHandler(e)} className="btn btn-primary btn-block">Update User</button>
-                        {/* {user ? user?.map(item => <p key={item} className="text-danger">{item}</p>) : null} */}
+                        {Array.isArray(error) ? error?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
                     </form>
                 </div>
             </div>

@@ -122,8 +122,7 @@ export const UpdateUser = (state,) => {
                 dispatch(UpdateSuccess(res.data.users.data))
             })
             .catch(error => {
-
-                dispatch(UpdateError(error.message))
+                dispatch(UpdateError(error.response?.data))
             })
     }
 }
