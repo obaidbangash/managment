@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { Update_Logs } from '../../../redux/action/Worklogs';
 function UpdateLogs({ editLogs, seteditModal }) {
-    const error = useSelector(state => state.LogReducer.error)
+    const error = useSelector(state => state.LogReducer.error);
     const dispatch = useDispatch();
     let token = sessionStorage.getItem("token");
     const [edit, setEdit] = useState(editLogs)

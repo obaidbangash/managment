@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Createusers, getUsers } from '../../redux/action/userAction';
 function CreateUser({ setCreateUser }) {
-    const formError = useSelector(state => state.userReducer.EserError);
+    const formError = useSelector(state => state.userReducer.UserError);
     // dispatch 
     const dispatch = useDispatch();
     // getting token copy
@@ -25,6 +25,7 @@ function CreateUser({ setCreateUser }) {
             dispatch(Createusers(userData, token))
             setUserData(dataObj);
             dispatch(getUsers(token))
+            setCreateUser(false)
         }
     }
     return (
@@ -92,7 +93,7 @@ function CreateUser({ setCreateUser }) {
                             }
                         </div>
                         <button onClick={(e) => formHandler(e)} className="btn btn-primary btn-block">Create User</button>
-                        {Array.isArray(formError) ? formError?.map(item => <p key={item} className="text-danger">{item}</p>) || <p className="text-danger">{formError.message}</p> : null}
+                        {Array.isArray(formError) ? formError?.map(item => <p key={item} className="text-danger">{item}</p>) : null}
                     </form>
                 </div>
             </div>
